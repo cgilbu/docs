@@ -34,10 +34,40 @@ This guide will help you configure an Apache web server with a website running o
 `a2enmod mpm_event http2` Switches to MPM event and enables HTTP/2\
 `systemctl restart apache2`
 
-## Install HTTPS
+## Install SSL (HTTPS)
 
 `apt install python3-pip libaugeas0` Installs "pip" package manager plus a required module for certbot-apache\
 `pip3 install certbot certbot-apache` Installs certificate provider with "Let's Encrypt"
+
+`nano /etc/systemd/system/certbot.service`
+
+```
+[Unit]
+Description=Let's Encrypt Renewal
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos --post-hook "systemctl reload apache2"
+```
+
+`nano /etc/systemd/system/certbot.timer`
+
+```
+[Unit]
+Description=Twice Daily Renewal of Let's Encrypt Certificates
+
+[Timer]
+OnCalendar=0/12:00:00
+RandomizedDelaySec=1h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+`systemctl start certbot.timer`\
+`systemctl enable certbot.timer` Enables automatic restart after server restart\
+`systemctl status certbot.timer`
 
 ## Install MySQL
 
