@@ -98,19 +98,18 @@ Grant file access (see below)
 `sudo chown -R :www-data /var/www` Makes www-data group owner of www-folder\
 `sudo chmod -R 774 /var/www` Grants full folder access to owner and group and read access to others
 
-## Disable Folder Listing (globally)
+## Disable Directory Listing (globally)
 
-`sudo nano /etc/apache2/apache2.conf`
-
-Remove **Indexes** from this section:
+`sudo nano /etc/apache2/conf-available/apache2-tweaks.conf`
 
 ```
 <Directory /var/www/>
-  Options Indexes FollowSymLinks
-  AllowOverride None
-  Require all granted
+  Options -Indexes
 </Directory>
 ```
+
+`sudo a2enconf apache2-tweaks.conf`\
+`sudo systemctl reload apache2`
 
 ## Create database with user
 
