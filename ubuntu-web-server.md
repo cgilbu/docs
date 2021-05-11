@@ -136,7 +136,7 @@ Remove **Indexes** from this section:
 
 # Enable WebSockets
 
-`sudo nano /etc/apache2/sites-available/domain.com-ssl.conf`
+`sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
 
 ```
 ProxyPass "/ws/" "ws://127.0.0.1:8080/"
