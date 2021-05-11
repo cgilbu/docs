@@ -13,7 +13,6 @@ This guide will help you configure an Apache web server with a website running o
 `ufw allow http` Port 80\
 `ufw allow https` Port 443\
 `ufw allow ssh` Port 22\
-`ufw allow 3306/tcp` Port 3306 (database)\
 `ufw enable`\
 `ufw status verbose`
 
@@ -46,14 +45,6 @@ This guide will help you configure an Apache web server with a website running o
 `systemctl status mysql`
 
 `mysql_secure_installation` Creates root user
-
-`nano /etc/mysql/mysql.conf.d/mysqld.cnf`
-
-```
-bind-address = 0.0.0.0 # Enables remote connections
-```
-
-`systemctl restart mysql`
 
 ## Disable Password Authentication
 
