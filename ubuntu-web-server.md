@@ -139,9 +139,23 @@ ProxyPassReverse "/ws/" "ws://127.0.0.1:8080/"
 
 ## Run WebSocket
 
-`sudo screen` Lets you run code on the server in the background\
-`php /var/www/domain.com/public_html/your-sync-script.php` Runs your WebSocket sync script\
-`CTRL AD` Detaches from screen
+`cd /etc/systemd/system`\
+`sudo nano your-websocket-sync.service`
 
-`sudo screen -r` Reconnects to screen\
-`CTRL AK` Kills screen
+```
+[Unit]
+Description=Your Sync
+
+[Service]
+Type=simple
+Restart=always
+User=chris
+ExecStart=/usr/bin/env php /var/www/domain.com/public_html/your-websocket-sync.php
+
+[Install]
+WantedBy=multi-user.target
+```
+
+`sudo systemctl start your-websocket-sync.service`\
+`sudo systemctl enable your-websocket-sync.service` Enables automatic restart after server restart\
+`sudo systemctl status your-websocket-sync.service`
