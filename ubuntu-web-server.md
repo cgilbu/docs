@@ -84,12 +84,12 @@ Exit and reconnect with new user
 
 ```
 <VirtualHost>
-	ServerAdmin your@email.com
-	DocumentRoot /var/www/domain.com/public_html
-	ServerName domain.com
+  ServerAdmin your@email.com
+  DocumentRoot /var/www/domain.com/public_html
+  ServerName domain.com
 
-	ErrorLog domain.com-error.log
-	CustomLog domain.com-access.log
+  ErrorLog domain.com-error.log
+  CustomLog domain.com-access.log
 </VirtualHost>
 ```
 
@@ -106,6 +106,20 @@ Grant file access (see below)
 
 `sudo chown -R :www-data /var/www` Makes www-data group owner of www-folder\
 `sudo chmod -R 774 /var/www` Grants full folder access to owner and group and read access to others
+
+## Disable Folder Listing (globally)
+
+`sudo nano /etc/apache2/apache2.conf`
+
+Remove **Indexes** from this section:
+
+```
+<Directory /var/www/>
+  Options Indexes FollowSymLinks
+  AllowOverride None
+  Require all granted
+</Directory>
+```
 
 ## Create database with user
 
