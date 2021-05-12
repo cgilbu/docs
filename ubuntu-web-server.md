@@ -187,3 +187,24 @@ WantedBy=multi-user.target
 `sudo systemctl start your-websocket-sync.service`\
 `sudo systemctl enable your-websocket-sync.service` Enables automatic restart after server restart\
 `sudo systemctl status your-websocket-sync.service`
+
+# Configure CORS for Cross-Origin Requests
+
+Necessary if domain.com is requesting stuff from other domains like api.domain.com.
+
+`sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
+
+```
+<Directory /var/www/domain.com/public_html>
+  SetEnvIf Origin "^(https:\/\/domain.com|http:\/\/localhost)$" DOMAIN=$0
+  Header always set Access-Control-Allow-Origin "%{DOMAIN}e"
+  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  Header always set Access-Control-Allow-Headers "Content-Type"
+
+  RewriteEngine on
+  RewriteCond %{REQUEST_METHOD} OPTIONS
+  RewriteRule ^(.*)$ $1 [R=200,L]
+</Directory>
+```
+
+`sudo systemctl reload apache2`
