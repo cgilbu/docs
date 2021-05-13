@@ -190,7 +190,7 @@ WantedBy=multi-user.target
 
 # Configure CORS for Cross-Origin Requests
 
-Necessary if domain.com is requesting stuff from other domains like api.domain.com.
+Necessary if domain.com is requesting stuff from other domains like api.domain.com. This should go in .htaccess (instead of the site config) if the CORS is project specific.
 
 `sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
 
