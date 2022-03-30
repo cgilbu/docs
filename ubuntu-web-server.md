@@ -215,7 +215,7 @@ Necessary if domain.com is requesting stuff from other domains like api.domain.c
 `sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
 
 ```
-<Directory /var/www/choices.redcreek.no/public_html>
+<Directory /var/www/domain.com/public_html>
   Options FollowSymLinks
   AllowOverride all
   Require all granted
