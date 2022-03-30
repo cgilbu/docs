@@ -48,7 +48,7 @@ Description=Let's Encrypt Renewal
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/certbot renew --quiet --agree-tos --post-hook "systemctl reload apache2"
+ExecStart=/usr/bin/certbot renew --quiet --agree-tos --renew-hook "systemctl reload apache2"
 ```
 
 `nano /etc/systemd/system/certbot.timer`
