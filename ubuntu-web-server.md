@@ -37,7 +37,7 @@ This guide will help you configure an Apache web server with a website running o
 ## Install SSL (HTTPS)
 
 `apt install python3-pip libaugeas0` Installs "pip" package manager plus a required module for certbot-apache\
-`pip3 install zope.interface --upgrade` Upgrades package required for certbot
+`pip3 install zope.interface --upgrade` Upgrades package required for certbot\
 `pip3 install certbot certbot-apache` Installs certificate provider with "Let's Encrypt"
 
 `nano /etc/systemd/system/certbot.service`
