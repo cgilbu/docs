@@ -55,7 +55,7 @@ ExecStart=/usr/bin/certbot renew --quiet --agree-tos --renew-hook "systemctl rel
 
 ```
 [Unit]
-Description=Twice Daily Renewal of Let's Encrypt Certificates
+Description=Daily Renewal of Let's Encrypt Certificates
 
 [Timer]
 OnCalendar=daily
