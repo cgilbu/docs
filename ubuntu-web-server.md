@@ -209,3 +209,15 @@ Necessary if domain.com is requesting stuff from other domains like api.domain.c
 ```
 
 `sudo systemctl reload apache2`
+
+# Enable .htaccess
+
+`sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
+
+```
+<Directory /var/www/choices.redcreek.no/public_html>
+	Options FollowSymLinks
+	AllowOverride all
+	Require all granted
+</Directory>
+```
