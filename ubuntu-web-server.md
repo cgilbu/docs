@@ -193,24 +193,23 @@ WantedBy=multi-user.target
 
 Necessary if domain.com is requesting stuff from other domains like api.domain.com.
 
-This goes in .htaccess:
+This goes in .htaccess (see below for how to enable):
 
 ```
 <IfModule mod_headers.c>
-	<IfModule mod_setenvif.c>
-		<IfModule mod_rewrite.c>
+  <IfModule mod_setenvif.c>
+    <IfModule mod_rewrite.c>
 
-			SetEnvIf Origin "^(https:\/\/domain.com|http:\/\/localhost)$" DOMAIN=$0
-			Header always set Access-Control-Allow-Origin "%{DOMAIN}e"
-			Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-			Header always set Access-Control-Allow-Headers "Content-Type"
+      SetEnvIf Origin "^(https:\/\/domain.com|http:\/\/localhost)$" DOMAIN=$0
+      Header always set Access-Control-Allow-Origin "%{DOMAIN}e"
+      Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+      Header always set Access-Control-Allow-Headers "Content-Type"
 
-			RewriteEngine on
-			RewriteCond %{REQUEST_METHOD} OPTIONS
-			RewriteRule ^(.*)$ $1 [R=200,L]
-
-		</IfModule>
-	</IfModule>
+      RewriteEngine on
+      RewriteCond %{REQUEST_METHOD} OPTIONS
+      RewriteRule ^(.*)$ $1 [R=200,L]
+    </IfModule>
+  </IfModule>
 </IfModule>
 ```
 
