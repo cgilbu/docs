@@ -191,23 +191,30 @@ WantedBy=multi-user.target
 
 # Configure CORS for Cross-Origin Requests
 
-Necessary if domain.com is requesting stuff from other domains like api.domain.com. This should go in .htaccess (instead of the site config) if the CORS is project specific.
+Necessary if domain.com is requesting stuff from other domains like api.domain.com.
 
-`sudo nano /etc/apache2/sites-available/domain.com-le-ssl.conf`
+This goes in .htaccess:
 
 ```
-<Directory /var/www/domain.com/public_html>
-  SetEnvIf Origin "^(https:\/\/domain.com|http:\/\/localhost)$" DOMAIN=$0
-  Header always set Access-Control-Allow-Origin "%{DOMAIN}e"
-  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
-  Header always set Access-Control-Allow-Headers "Content-Type"
+<IfModule mod_headers.c>
+	<IfModule mod_setenvif.c>
+		<IfModule mod_rewrite.c>
 
-  RewriteEngine on
-  RewriteCond %{REQUEST_METHOD} OPTIONS
-  RewriteRule ^(.*)$ $1 [R=200,L]
-</Directory>
+			SetEnvIf Origin "^(https:\/\/domain.com|http:\/\/localhost)$" DOMAIN=$0
+			Header always set Access-Control-Allow-Origin "%{DOMAIN}e"
+			Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+			Header always set Access-Control-Allow-Headers "Content-Type"
+
+			RewriteEngine on
+			RewriteCond %{REQUEST_METHOD} OPTIONS
+			RewriteRule ^(.*)$ $1 [R=200,L]
+
+		</IfModule>
+	</IfModule>
+</IfModule>
 ```
 
+`sudo a2enmod headers`\
 `sudo systemctl reload apache2`
 
 # Enable .htaccess
@@ -221,6 +228,3 @@ Necessary if domain.com is requesting stuff from other domains like api.domain.c
   Require all granted
 </Directory>
 ```
-
-`sudo a2enmod headers`\
-`sudo systemctl reload apache2`
