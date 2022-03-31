@@ -227,3 +227,5 @@ This goes in .htaccess (see below for how to enable):
   Require all granted
 </Directory>
 ```
+
+`sudo systemctl reload apache2`
