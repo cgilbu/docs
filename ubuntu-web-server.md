@@ -221,3 +221,6 @@ Necessary if domain.com is requesting stuff from other domains like api.domain.c
   Require all granted
 </Directory>
 ```
+
+`sudo a2enmod headers`\
+`sudo systemctl reload apache2`
