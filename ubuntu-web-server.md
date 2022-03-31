@@ -217,7 +217,7 @@ Necessary if domain.com is requesting stuff from other domains like api.domain.c
 ```
 <Directory /var/www/domain.com/public_html>
   Options FollowSymLinks
-  AllowOverride all
+  AllowOverride All
   Require all granted
 </Directory>
 ```
