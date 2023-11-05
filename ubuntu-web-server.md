@@ -2,6 +2,10 @@
 
 This guide will help you configure an Apache web server with a website running on PHP and MySQL. It will also enable HTTP/2 and HTTPS and show you how to run WebSockets.
 
+## Connect to Server
+
+`sudo ssh -i "key.pem" user@address`
+
 ## Upgrade Ubuntu
 
 `apt update` Gets available upgrades\
@@ -116,7 +120,7 @@ Exit and reconnect with new user
 ```
 
 `sudo a2ensite domain.com.conf`\
-`sudo systemctl restart apache2`
+`sudo systemctl reload apache2`
 
 `sudo certbot --apache -d domain.com` Enables HTTPS (works only after domain has been pointed)
 
